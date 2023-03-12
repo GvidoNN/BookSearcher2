@@ -1,4 +1,4 @@
-package com.example.booksearcher2.domain.models
+package com.example.booksearcher2.domain.models.api
 
 data class Edition(
     val authors: List<Author>,
