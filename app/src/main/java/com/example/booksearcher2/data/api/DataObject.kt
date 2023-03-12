@@ -1,16 +1,26 @@
 package com.example.booksearcher2.data.api
 
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 private const val BASE_URL = "https://openlibrary.org/search/"
 
+
+@Module
+@InstallIn(SingletonComponent::class)
 object DataObject {
 
     var retrofitService: DataService? = null
 
+    @Provides
+    @Singleton
     fun getInstance() : DataService {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
