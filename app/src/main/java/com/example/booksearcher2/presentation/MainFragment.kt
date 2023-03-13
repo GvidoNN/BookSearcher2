@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
 import com.example.booksearcher2.data.api.DataObject
 import com.example.booksearcher2.data.api.DataService
@@ -25,17 +28,26 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var apiService: DataService
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: SearchInsideAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            apiService = DataObject.getInstance()
+        apiService = DataObject.getInstance()
 
+        recyclerView = requireView().findViewById(R.id.recyclerView)
+        adapter = SearchInsideAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         mainViewModel.searchResponce()
 
         mainViewModel.searchInside.observe(viewLifecycleOwner){
+            adapter.setMovieList(it.hits.hits)
             it.hits.hits.forEach {
+                Log.d("MyLog","")
                 Log.d("MyLog","${it.edition.title}")
+                Log.d("MyLog","${it.edition.isExpandable}")
             }
         }
     }
