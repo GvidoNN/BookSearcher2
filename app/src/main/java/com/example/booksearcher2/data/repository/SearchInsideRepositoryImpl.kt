@@ -5,19 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.booksearcher2.data.api.DataService
 import com.example.booksearcher2.domain.models.api.DataResponce
+import com.example.booksearcher2.domain.repository.SearchInsideRepository
+import retrofit2.Response
 import javax.inject.Inject
 
-class SearchInsideRepositoryImpl (private val dataService: DataService){
-
-    private val searchInsideLiveData = MutableLiveData<DataResponce>()
-
-    val searchInside : LiveData<DataResponce>
-    get() = searchInsideLiveData
-
-    suspend fun getSearchInside(){
-        val result = dataService.getInsideSearch()
-        if(result.body() != null){
-            searchInsideLiveData.postValue(result.body())
-        }
+class SearchInsideRepositoryImpl @Inject constructor(private val dataService: DataService): SearchInsideRepository{
+    override suspend fun getSearchInside(text: String): Response<DataResponce> {
+        val result = dataService.getInsideSearch(text)
+        return result
     }
 }

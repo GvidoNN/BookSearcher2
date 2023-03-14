@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">BookSearcher2</string>
+    <string name="app_name" translatable="false">BookSearcher2</string>
+    <string name="error">Oops Error! Please try again later</string>
+    <string name="try_again">TRY AGAIN</string>
 </resources>

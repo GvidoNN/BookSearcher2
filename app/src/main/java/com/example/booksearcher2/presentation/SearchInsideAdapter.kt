@@ -48,8 +48,6 @@ class SearchInsideAdapter():
     override fun onBindViewHolder(holder: InsideSearchViewHolder, position: Int) {
 
         val bookData = searchInsideList[position]
-        Log.d("MyLog","${bookData.edition.cover_url}")
-//        bookData.edition.cover_url
         val url = "https:" + bookData.edition.cover_url
         Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
         holder.tvTextName.text = bookData.edition.title
