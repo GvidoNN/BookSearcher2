@@ -44,11 +44,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         mainViewModel.searchInside.observe(viewLifecycleOwner){
             adapter.setMovieList(it.hits.hits)
-            it.hits.hits.forEach {
-                Log.d("MyLog","")
-                Log.d("MyLog","${it.edition.title}")
-                Log.d("MyLog","${it.edition.isExpandable}")
-            }
+//            it.hits.hits.forEach {
+//
+//            }
         }
     }
 }

@@ -26,7 +26,7 @@ object DataObject {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
         if (retrofitService == null) {
-            val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+            val retrofit = Retrofit.Builder().baseUrl(BASE_URL).client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             retrofitService = retrofit.create(DataService::class.java)

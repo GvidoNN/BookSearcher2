@@ -1,6 +1,7 @@
 package com.example.booksearcher2.presentation
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,14 +48,15 @@ class SearchInsideAdapter():
     override fun onBindViewHolder(holder: InsideSearchViewHolder, position: Int) {
 
         val bookData = searchInsideList[position]
-        Glide.with(context).load(bookData.edition.cover_url).into(holder.imCoverBook)
+        Log.d("MyLog","${bookData.edition.cover_url}")
+//        bookData.edition.cover_url
+        val url = "https:" + bookData.edition.cover_url
+        Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
         holder.tvTextName.text = bookData.edition.title
-        holder.tvAuthorName.text = bookData.edition.authors.size.toString()
+        holder.tvAuthorName.text = bookData.edition.authors[0].name
         holder.tvSubject.text = bookData.highlight.text[0]
-
         val isExpandable: Boolean = bookData.edition.isExpandable
         holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
-
         holder.constraintLayout.setOnClickListener {
             isAnyItemExpanded(position)
             bookData.edition.isExpandable = !bookData.edition.isExpandable

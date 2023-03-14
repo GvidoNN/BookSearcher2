@@ -8,6 +8,6 @@ import retrofit2.http.GET
 interface DataService {
 //    https://openlibrary.org/search
 
-    @GET("inside.json?q=rostova")
+    @GET("inside.json?q=rostova&limit=5")
     suspend fun getInsideSearch() : Response<DataResponce>
 }
