@@ -3,6 +3,7 @@ package com.example.booksearcher2.presentation
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -26,6 +27,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var apiService: DataService
     lateinit var recyclerView: RecyclerView
+    lateinit var edEnter: EditText
     lateinit var adapter: SearchInsideAdapter
     lateinit var btSearch: ImageButton
 //    lateinit var progressBar: ProgressBar
@@ -37,6 +39,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         recyclerView = requireView().findViewById(R.id.recyclerView)
         btSearch = requireView().findViewById(R.id.btSearch)
+        edEnter = requireView().findViewById(R.id.edEnter)
 //        progressBar = requireView().findViewById(R.id.progressBar)
 //        errorContainer = requireView().findViewById(R.id.errorContainer)
         adapter = SearchInsideAdapter()
@@ -45,18 +48,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
 
         btSearch.setOnClickListener{
-            mainViewModel.searchResponce("rostova")
+            var text = edEnter.text.toString()
+            mainViewModel.searchResponce(text)
             mainViewModel.searchInside.observe(viewLifecycleOwner){ result ->
                 adapter.setMovieList(result.hits.hits)
             }
         }
     }
 }
-
-
-//    private lateinit var mainViewModel: MainViewModel
-
-//        mainViewModel = ViewModelProvider(
-//            requireActivity(),
-//            MainViewModelFactory(searchInsideRepository)
-//        ).get(MainViewModel::class.java)
