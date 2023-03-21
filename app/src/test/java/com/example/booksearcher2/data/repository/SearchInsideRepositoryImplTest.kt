@@ -29,7 +29,7 @@ class SearchInsideRepositoryImplTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `getSearchInside returns DataResponse`() = runTest {
+    fun `getSearchInside from repository returns DataResponse`() = runTest {
         // Настраиваем поведение mock объектов при вызове метода getSearchInside
         whenever(retrofit.create(DataService::class.java)).thenReturn(dataService)
         whenever(dataService.getInsideSearch(testText)).thenReturn(Response.success(testDataResponse))
