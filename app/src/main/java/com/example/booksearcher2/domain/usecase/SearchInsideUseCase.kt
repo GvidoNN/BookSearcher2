@@ -7,8 +7,9 @@ import retrofit2.Response
 
 class SearchInsideUseCase(private val searchInsideRepository: SearchInsideRepository) {
 
-    suspend fun getSearchInside(text: String): Response<DataResponce> {
+    suspend fun getSearchInside(text: String): Response<DataResponce>? {
         val result = searchInsideRepository.getSearchInside(text)
+        Log.d("MyLog", "$result")
         return result
     }
 }

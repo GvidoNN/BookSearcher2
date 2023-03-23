@@ -54,7 +54,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             var text = edEnter.text.toString()
             mainViewModel.searchResponce(text)
 
-            mainViewModel.progressBarLiveData.observe(viewLifecycleOwner){
+            mainViewModel.progressBar.observe(viewLifecycleOwner){
                 if(it == true) progressBar.visibility = View.VISIBLE
                 else progressBar.visibility = View.GONE
             }

@@ -14,18 +14,20 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchInsideUseCase): ViewModel() {
 
     private val searchInsideLiveData = MutableLiveData<DataResponce>()
-    var progressBarLiveData = MutableLiveData<Boolean>()
+    private var progressBarLiveData = MutableLiveData<Boolean>()
 
     val searchInside : LiveData<DataResponce>
     get() = searchInsideLiveData
 
+    val progressBar: LiveData<Boolean>
+    get() = progressBarLiveData
+
     fun searchResponce(text: String) = viewModelScope.launch {
         progressBarLiveData.postValue(true)
         var result = searchInsideUseCase.getSearchInside(text)
-        if(result.body() != null){
+        if(result?.body() != null){
             searchInsideLiveData.postValue(result.body())
         }
-        Log.d("MyLog","По идее взяло")
         progressBarLiveData.postValue(false)
     }
 
