@@ -14,7 +14,7 @@ import com.example.booksearcher2.R
 import com.example.booksearcher2.domain.models.api.DataResponce
 import com.example.booksearcher2.domain.models.api.Hit
 
-class SearchInsideAdapter():
+class SearchInsideAdapter() :
     RecyclerView.Adapter<SearchInsideAdapter.InsideSearchViewHolder>() {
     private lateinit var context: Context
 
@@ -46,29 +46,45 @@ class SearchInsideAdapter():
     }
 
     override fun onBindViewHolder(holder: InsideSearchViewHolder, position: Int) {
-
+        Log.d("MyLog", "долшло")
         val bookData = searchInsideList[position]
-        val url = "https:" + bookData.edition.cover_url
-        Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
-        holder.tvTextName.text = bookData.edition.title
-        holder.tvAuthorName.text = bookData.edition.authors[0].name
-        holder.tvSubject.text = bookData.highlight.text[0]
-        val isExpandable: Boolean = bookData.edition.isExpandable
-        holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
-        holder.constraintLayout.setOnClickListener {
-            isAnyItemExpanded(position)
-            bookData.edition.isExpandable = !bookData.edition.isExpandable
-            notifyItemChanged(position)
+        try {
+            val url = "https:" + bookData.edition.cover_url
+            Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
+            holder.tvTextName.text = bookData.edition.title
+            holder.tvAuthorName.text = bookData.edition.authors[0].name
+            holder.tvSubject.text = bookData.highlight.text[0]
+            val isExpandable: Boolean = bookData.isExpandable
+            holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
+            holder.constraintLayout.setOnClickListener {
+                isAnyItemExpanded(position)
+                bookData.isExpandable = !bookData.isExpandable
+                notifyItemChanged(position)
+            }
+        } catch (e: Exception) {
+            val url = "https:" + "//covers.openlibrary.org/w/id/511582-M.jpg"
+            Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
+            holder.tvTextName.text = "Non Title"
+            holder.tvAuthorName.text = "Non Author"
+            holder.tvSubject.text = bookData.highlight.text[0]
+            val isExpandable: Boolean = bookData.isExpandable
+            holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
+            holder.constraintLayout.setOnClickListener {
+                isAnyItemExpanded(position)
+                bookData.isExpandable = !bookData.isExpandable
+                notifyItemChanged(position)
+            }
+
         }
 
     }
 
     private fun isAnyItemExpanded(position: Int) {
         val temp = searchInsideList.indexOfFirst {
-            it.edition.isExpandable
+            it.isExpandable
         }
         if (temp >= 0 && temp != position) {
-            searchInsideList[temp].edition.isExpandable = false
+            searchInsideList[temp].isExpandable = false
             notifyItemChanged(temp, 0)
         }
 

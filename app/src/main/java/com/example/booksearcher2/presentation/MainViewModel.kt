@@ -1,4 +1,5 @@
 package com.example.booksearcher2.presentation
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,15 +14,19 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchInsideUseCase): ViewModel() {
 
     private val searchInsideLiveData = MutableLiveData<DataResponce>()
+    var progressBarLiveData = MutableLiveData<Boolean>()
 
     val searchInside : LiveData<DataResponce>
     get() = searchInsideLiveData
+
     fun searchResponce(text: String) = viewModelScope.launch {
+        progressBarLiveData.postValue(true)
         var result = searchInsideUseCase.getSearchInside(text)
         if(result.body() != null){
             searchInsideLiveData.postValue(result.body())
         }
-        searchInsideUseCase.getSearchInside(text)
+        Log.d("MyLog","По идее взяло")
+        progressBarLiveData.postValue(false)
     }
 
 }

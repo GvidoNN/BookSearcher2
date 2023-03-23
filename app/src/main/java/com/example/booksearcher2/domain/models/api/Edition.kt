@@ -7,6 +7,5 @@ data class Edition(
     val key: String,
     val title: String,
     val url: String,
-    val work_key: String,
-    var isExpandable: Boolean = false
+    val work_key: String
 )

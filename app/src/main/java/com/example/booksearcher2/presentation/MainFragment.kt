@@ -30,7 +30,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     lateinit var edEnter: EditText
     lateinit var adapter: SearchInsideAdapter
     lateinit var btSearch: ImageButton
-//    lateinit var progressBar: ProgressBar
+    lateinit var progressBar: ProgressBar
 //    lateinit var errorContainer: LinearLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,18 +40,23 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         recyclerView = requireView().findViewById(R.id.recyclerView)
         btSearch = requireView().findViewById(R.id.btSearch)
         edEnter = requireView().findViewById(R.id.edEnter)
-//        progressBar = requireView().findViewById(R.id.progressBar)
+        progressBar = requireView().findViewById(R.id.progressBar)
 //        errorContainer = requireView().findViewById(R.id.errorContainer)
         adapter = SearchInsideAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        mainViewModel.searchInside.observe(viewLifecycleOwner){ result ->
+            adapter.setMovieList(result.hits.hits)
+        }
 
         btSearch.setOnClickListener{
             var text = edEnter.text.toString()
             mainViewModel.searchResponce(text)
-            mainViewModel.searchInside.observe(viewLifecycleOwner){ result ->
-                adapter.setMovieList(result.hits.hits)
+
+            mainViewModel.progressBarLiveData.observe(viewLifecycleOwner){
+                if(it == true) progressBar.visibility = View.VISIBLE
+                else progressBar.visibility = View.GONE
             }
         }
     }
