@@ -46,7 +46,6 @@ class SearchInsideAdapter() :
     }
 
     override fun onBindViewHolder(holder: InsideSearchViewHolder, position: Int) {
-        Log.d("MyLog", "долшло")
         val bookData = searchInsideList[position]
         try {
             val url = "https:" + bookData.edition.cover_url

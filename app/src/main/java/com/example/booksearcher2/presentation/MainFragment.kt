@@ -3,10 +3,12 @@ package com.example.booksearcher2.presentation
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,7 +33,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     lateinit var adapter: SearchInsideAdapter
     lateinit var btSearch: ImageButton
     lateinit var progressBar: ProgressBar
-//    lateinit var errorContainer: LinearLayout
+    lateinit var errorContainer: LinearLayout
+    lateinit var btErrorTryAgain: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,23 +44,39 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         btSearch = requireView().findViewById(R.id.btSearch)
         edEnter = requireView().findViewById(R.id.edEnter)
         progressBar = requireView().findViewById(R.id.progressBar)
-//        errorContainer = requireView().findViewById(R.id.errorContainer)
+        errorContainer = requireView().findViewById(R.id.errorContainer)
+        btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
         adapter = SearchInsideAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         mainViewModel.searchInside.observe(viewLifecycleOwner){ result ->
-            adapter.setMovieList(result.hits.hits)
+            if(result != null){
+                adapter.setMovieList(result.hits.hits)
+
+            } else{
+                errorContainer.visibility = View.VISIBLE
+            }
         }
 
         btSearch.setOnClickListener{
-            var text = edEnter.text.toString()
-            mainViewModel.searchResponce(text)
+            setOnClick()
+        }
 
-            mainViewModel.progressBar.observe(viewLifecycleOwner){
-                if(it == true) progressBar.visibility = View.VISIBLE
-                else progressBar.visibility = View.GONE
-            }
+        btErrorTryAgain.setOnClickListener {
+            setOnClick()
+        }
+
+
+    }
+
+    fun setOnClick(){
+        var text = edEnter.text.toString()
+        mainViewModel.searchResponce(text)
+
+        mainViewModel.progressBar.observe(viewLifecycleOwner){
+            if(it == true) progressBar.visibility = View.VISIBLE
+            else progressBar.visibility = View.GONE
         }
     }
 }

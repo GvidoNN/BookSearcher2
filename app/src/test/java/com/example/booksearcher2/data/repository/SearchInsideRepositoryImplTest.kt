@@ -21,15 +21,14 @@ class SearchInsideRepositoryImplTest {
 
     // Создаем экземпляр класса репозитория с передачей mock dataService
     private val searchInsideRepository = SearchInsideRepositoryImpl(dataService)
-
-    // Подготавливаем тестовые данные для проверки
-    private val testText = "test"
-    private val testDataResponse = DataResponce(hits = Hits(
-        hits = listOf(Hit(edition = Edition(listOf(Author("test","test")), borrow_url = "test", cover_url = "test", key = "test", title = "test", url = "test", work_key = "test", isExpandable = true), highlight = Highlight(listOf("test")))),total = 1))
-
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `getSearchInside from repository returns DataResponse`() = runTest {
+
+        // Подготавливаем тестовые данные для проверки
+        val testText = "test"
+        val testDataResponse = DataResponce(hits = Hits(
+            hits = listOf(Hit(edition = Edition(listOf(Author("test","test")), borrow_url = "test", cover_url = "test", key = "test", title = "test", url = "test", work_key = "test"), highlight = Highlight(listOf("test")))),total = 1))
         // Настраиваем поведение mock объектов при вызове метода getSearchInside
         whenever(retrofit.create(DataService::class.java)).thenReturn(dataService)
         whenever(dataService.getInsideSearch(testText)).thenReturn(Response.success(testDataResponse))
@@ -37,8 +36,27 @@ class SearchInsideRepositoryImplTest {
         // Вызываем метод репозитория с передачей testDispatcher в качестве аргумента и проверяем результат с ожидаемым ответом
         assertEquals(
             testDataResponse,
-            searchInsideRepository.getSearchInside(testText).body()
+            searchInsideRepository.getSearchInside(testText)?.body()
         )
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `getSearchInside from repository returns Error because of Internet`() = runTest {
+
+        val testText = "test"
+        val testDataResponse = null
+        // Настраиваем поведение mock объектов при вызове метода getSearchInside
+        whenever(retrofit.create(DataService::class.java)).thenReturn(dataService)
+        whenever(dataService.getInsideSearch(testText)).thenReturn(Response.success(testDataResponse))
+
+        // Вызываем метод репозитория с передачей testDispatcher в качестве аргумента и проверяем результат с ожидаемым ответом
+        assertEquals(
+            testDataResponse,
+            searchInsideRepository.getSearchInside(testText)?.body()
+        )
+    }
+
+
 
 }

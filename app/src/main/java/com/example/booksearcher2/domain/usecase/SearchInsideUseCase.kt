@@ -9,7 +9,6 @@ class SearchInsideUseCase(private val searchInsideRepository: SearchInsideReposi
 
     suspend fun getSearchInside(text: String): Response<DataResponce>? {
         val result = searchInsideRepository.getSearchInside(text)
-        Log.d("MyLog", "$result")
         return result
     }
 }
