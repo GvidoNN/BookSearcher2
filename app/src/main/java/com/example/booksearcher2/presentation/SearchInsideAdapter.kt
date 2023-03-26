@@ -52,7 +52,8 @@ class SearchInsideAdapter() :
             Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
             holder.tvTextName.text = bookData.edition.title
             holder.tvAuthorName.text = bookData.edition.authors[0].name
-            holder.tvSubject.text = bookData.highlight.text[0]
+            var textSub = bookData.highlight.text[0].replace("{{","\b")
+            holder.tvSubject.text = textSub
             val isExpandable: Boolean = bookData.isExpandable
             holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
             holder.constraintLayout.setOnClickListener {

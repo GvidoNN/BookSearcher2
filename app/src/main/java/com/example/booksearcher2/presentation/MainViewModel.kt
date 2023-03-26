@@ -25,10 +25,6 @@ class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchI
     fun searchResponce(text: String) = viewModelScope.launch {
         progressBarLiveData.postValue(true)
         var result = searchInsideUseCase.getSearchInside(text)
-//        if(result?.body() != null){
-//            searchInsideLiveData.postValue(result.body())
-//            Log.d("MyLog","тут $searchInsideLiveData")
-//        }
         searchInsideLiveData.postValue(result?.body() ?: null)
 
         progressBarLiveData.postValue(false)

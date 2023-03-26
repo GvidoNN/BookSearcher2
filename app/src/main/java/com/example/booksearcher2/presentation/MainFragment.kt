@@ -22,7 +22,6 @@ import com.example.booksearcher2.data.api.DataService
 import dagger.hilt.android.AndroidEntryPoint
 
 
-
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -38,28 +37,27 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findItems()
         apiService = DataObject.getInstance()
-
-        recyclerView = requireView().findViewById(R.id.recyclerView)
-        btSearch = requireView().findViewById(R.id.btSearch)
-        edEnter = requireView().findViewById(R.id.edEnter)
-        progressBar = requireView().findViewById(R.id.progressBar)
-        errorContainer = requireView().findViewById(R.id.errorContainer)
-        btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
         adapter = SearchInsideAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        mainViewModel.searchInside.observe(viewLifecycleOwner){ result ->
-            if(result != null){
+        mainViewModel.searchInside.observe(viewLifecycleOwner) { result ->
+            if (result != null) {
                 adapter.setMovieList(result.hits.hits)
+                errorContainer.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
 
-            } else{
+
+            } else {
                 errorContainer.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+
             }
         }
 
-        btSearch.setOnClickListener{
+        btSearch.setOnClickListener {
             setOnClick()
         }
 
@@ -70,13 +68,27 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     }
 
-    fun setOnClick(){
+    fun setOnClick() {
         var text = edEnter.text.toString()
         mainViewModel.searchResponce(text)
 
-        mainViewModel.progressBar.observe(viewLifecycleOwner){
-            if(it == true) progressBar.visibility = View.VISIBLE
-            else progressBar.visibility = View.GONE
+        mainViewModel.progressBar.observe(viewLifecycleOwner) {
+            if (it == true) {
+                progressBar.visibility = View.VISIBLE
+                btSearch.isClickable = false
+            } else {
+                progressBar.visibility = View.GONE
+                btSearch.isClickable = true
+            }
         }
+    }
+
+    fun findItems() {
+        recyclerView = requireView().findViewById(R.id.recyclerView)
+        btSearch = requireView().findViewById(R.id.btSearch)
+        edEnter = requireView().findViewById(R.id.edEnter)
+        progressBar = requireView().findViewById(R.id.progressBar)
+        errorContainer = requireView().findViewById(R.id.errorContainer)
+        btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
     }
 }

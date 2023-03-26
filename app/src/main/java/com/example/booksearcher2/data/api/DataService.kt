@@ -9,6 +9,6 @@ import retrofit2.http.Query
 interface DataService {
 //    https://openlibrary.org/search
 
-    @GET("inside.json?&limit=5")
+    @GET("inside.json?&limit=25")
     suspend fun getInsideSearch(@Query("q") text: String) : Response<DataResponce>
 }
