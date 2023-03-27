@@ -62,8 +62,7 @@ class SearchInsideAdapter() :
                 notifyItemChanged(position)
             }
         } catch (e: Exception) {
-            val url = "https:" + "//covers.openlibrary.org/w/id/511582-M.jpg"
-            Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
+            holder.imCoverBook.setImageResource(R.drawable.nocover)
             holder.tvTextName.text = "Non Title"
             holder.tvAuthorName.text = "Non Author"
             holder.tvSubject.text = bookData.highlight.text[0]

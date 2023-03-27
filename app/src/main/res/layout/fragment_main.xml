@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        layout="@layout/part_result"
+        android:visibility="visible" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,11 +39,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="0dp"
                 android:src="?android:attr/actionModeWebSearchDrawable" />
-        </LinearLayout>
 
-        <include
-            layout="@layout/part_result"
-            android:visibility="visible" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

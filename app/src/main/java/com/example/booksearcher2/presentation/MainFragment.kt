@@ -8,12 +8,8 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
@@ -48,12 +44,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 adapter.setMovieList(result.hits.hits)
                 errorContainer.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
-
-
             } else {
                 errorContainer.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE
-
             }
         }
 
@@ -75,6 +68,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         mainViewModel.progressBar.observe(viewLifecycleOwner) {
             if (it == true) {
                 progressBar.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
                 btSearch.isClickable = false
             } else {
                 progressBar.visibility = View.GONE
