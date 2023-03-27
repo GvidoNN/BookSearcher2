@@ -1,4 +1,4 @@
-package com.example.booksearcher2.presentation
+package com.example.booksearcher2.presentation.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

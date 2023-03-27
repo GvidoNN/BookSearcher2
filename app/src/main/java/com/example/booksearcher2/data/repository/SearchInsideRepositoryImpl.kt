@@ -16,7 +16,6 @@ class SearchInsideRepositoryImpl @Inject constructor(private val dataService: Da
         } catch (e: java.net.UnknownHostException){
             null
         }
-
     }
 }
 

@@ -2,4 +2,6 @@
     <string name="app_name" translatable="false">BookSearcher2</string>
     <string name="error">Oops Error! Please try again later</string>
     <string name="try_again">TRY AGAIN</string>
+    <string name="search">Search</string>
+    <string name="favourite">Favourite</string>
 </resources>

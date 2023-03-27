@@ -1,7 +1,6 @@
-package com.example.booksearcher2.presentation
+package com.example.booksearcher2.presentation.main
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.booksearcher2.R
-import com.example.booksearcher2.domain.models.api.DataResponce
 import com.example.booksearcher2.domain.models.api.Hit
 
 class SearchInsideAdapter() :
