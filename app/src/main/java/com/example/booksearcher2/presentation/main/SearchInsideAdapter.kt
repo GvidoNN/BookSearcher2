@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.booksearcher2.R
 import com.example.booksearcher2.domain.models.api.Hit
+import java.lang.reflect.Executable
 
 class SearchInsideAdapter() :
     RecyclerView.Adapter<SearchInsideAdapter.InsideSearchViewHolder>() {
@@ -48,31 +49,29 @@ class SearchInsideAdapter() :
         try {
             val url = "https:" + bookData.edition.cover_url
             Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
-            holder.tvTextName.text = bookData.edition.title
-            holder.tvAuthorName.text = bookData.edition.authors[0].name
-            var textSub = bookData.highlight.text[0].replace("{{","\b")
-            holder.tvSubject.text = textSub
-            val isExpandable: Boolean = bookData.isExpandable
-            holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
-            holder.constraintLayout.setOnClickListener {
-                isAnyItemExpanded(position)
-                bookData.isExpandable = !bookData.isExpandable
-                notifyItemChanged(position)
-            }
         } catch (e: Exception) {
             holder.imCoverBook.setImageResource(R.drawable.nocover)
-            holder.tvTextName.text = "Non Title"
-            holder.tvAuthorName.text = "Non Author"
-            holder.tvSubject.text = bookData.highlight.text[0]
-            val isExpandable: Boolean = bookData.isExpandable
-            holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
-            holder.constraintLayout.setOnClickListener {
-                isAnyItemExpanded(position)
-                bookData.isExpandable = !bookData.isExpandable
-                notifyItemChanged(position)
-            }
-
         }
+        try {
+            holder.tvTextName.text = bookData.edition.title
+        } catch (e: Exception) {
+            holder.tvTextName.text = "Non Title"
+        }
+        try {
+            holder.tvAuthorName.text = bookData.edition.authors[0].name
+        } catch (e: java.lang.Exception) {
+            holder.tvAuthorName.text = "Non Author"
+        }
+        var textSub = bookData.highlight.text[0].replace("{{", "\b")
+        holder.tvSubject.text = textSub
+        val isExpandable: Boolean = bookData.isExpandable
+        holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
+        holder.constraintLayout.setOnClickListener {
+            isAnyItemExpanded(position)
+            bookData.isExpandable = !bookData.isExpandable
+            notifyItemChanged(position)
+        }
+
 
     }
 
