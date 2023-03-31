@@ -6,7 +6,10 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
+import com.example.booksearcher2.data.database.DataBaseObject
 import com.example.booksearcher2.data.database.FavouriteBookDataBase
 import com.example.booksearcher2.domain.models.database.FavouriteBook
 
@@ -16,6 +19,8 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     private lateinit var edTitle: EditText
     private lateinit var edAuthor: EditText
     private lateinit var edUrl: EditText
+    private lateinit var favouriteRecyclerView: RecyclerView
+    private lateinit var adapter: FavouriteAdapter
 
     private lateinit var viewModel: FavouriteViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,7 +31,13 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
         edAuthor = requireView().findViewById(R.id.edAuthor)
         edUrl = requireView().findViewById(R.id.edUrl)
 
-        val dao = FavouriteBookDataBase.getInstance(requireContext()).favouriteBookDao()
+        favouriteRecyclerView = requireView().findViewById(R.id.recyclerViewFavouriteBooks)
+        favouriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        adapter = FavouriteAdapter()
+        favouriteRecyclerView.adapter = adapter
+
+
+        val dao = DataBaseObject.getInstance(requireContext()).favouriteBookDao()
         val factory = FavouriteViewModelFactory(dao)
         viewModel = ViewModelProvider(this, factory).get(FavouriteViewModel::class.java)
 
@@ -34,8 +45,19 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
             saveBookData()
         }
 
+        displayAllBooks()
+
 
     }
+
+    private fun displayAllBooks(){
+        viewModel.books.observe(viewLifecycleOwner,{
+            adapter.setFavouriteList(it)
+            adapter.notifyDataSetChanged()
+        })
+
+    }
+
 
     private fun saveBookData() {
 //        val title = edTitle.text.toString()
