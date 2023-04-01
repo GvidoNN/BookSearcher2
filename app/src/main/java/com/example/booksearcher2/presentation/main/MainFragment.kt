@@ -1,6 +1,7 @@
 package com.example.booksearcher2.presentation.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -77,6 +78,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 btSearch.isClickable = true
             }
         }
+
+        adapter.setOnItemClickListener(object: SearchInsideAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Log.d("MyLog","$position")
+            }
+
+        })
     }
 
     fun findItems() {

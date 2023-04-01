@@ -1,9 +1,12 @@
 package com.example.booksearcher2.presentation.main
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.booksearcher2.R
 import com.example.booksearcher2.domain.models.api.Hit
-import java.lang.reflect.Executable
 
 class SearchInsideAdapter() :
     RecyclerView.Adapter<SearchInsideAdapter.InsideSearchViewHolder>() {
+
     private lateinit var context: Context
+    private lateinit var favouriteBookListener: OnItemClickListener
 
     var searchInsideList = mutableListOf<Hit>()
 
@@ -24,19 +28,26 @@ class SearchInsideAdapter() :
         notifyDataSetChanged()
     }
 
-    class InsideSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class InsideSearchViewHolder(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val tvTextName: TextView = itemView.findViewById(R.id.tvTextName)
         val tvAuthorName: TextView = itemView.findViewById(R.id.tvAuthorName)
         val imCoverBook: ImageView = itemView.findViewById(R.id.imCoverBook)
         val tvSubject: TextView = itemView.findViewById(R.id.tvSubject)
+        val imAddToFavourite: ImageButton = itemView.findViewById(R.id.imAddToFavourite)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
+        init {
+            imAddToFavourite.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+                Log.d("MyLog","Click on this shit")
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InsideSearchViewHolder {
         context = parent.context
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.inside_search_item, parent, false)
-        return InsideSearchViewHolder(view)
+        return InsideSearchViewHolder(view,favouriteBookListener)
 
     }
 
@@ -71,6 +82,9 @@ class SearchInsideAdapter() :
             bookData.isExpandable = !bookData.isExpandable
             notifyItemChanged(position)
         }
+//        holder.imAddToFavourite.setOnClickListener{
+//            holder.imAddToFavourite.setImageResource(R.drawable.icon_favourite_true)
+//        }
 
 
     }
@@ -85,4 +99,13 @@ class SearchInsideAdapter() :
         }
 
     }
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        favouriteBookListener = listener
+    }
+
 }

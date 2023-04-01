@@ -38,7 +38,13 @@
             android:id="@+id/btAddToBD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="add" />
+
+        <Button
+            android:id="@+id/btDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="delete" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFavouriteBooks"

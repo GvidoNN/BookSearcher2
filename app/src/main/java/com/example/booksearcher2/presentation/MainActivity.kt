@@ -1,7 +1,8 @@
-package com.example.booksearcher2
+package com.example.booksearcher2.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.booksearcher2.R
 import dagger.hilt.android.AndroidEntryPoint
 
 

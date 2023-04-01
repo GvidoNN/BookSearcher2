@@ -1,4 +1,4 @@
-package com.example.booksearcher2.data.app
+package com.example.booksearcher2.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

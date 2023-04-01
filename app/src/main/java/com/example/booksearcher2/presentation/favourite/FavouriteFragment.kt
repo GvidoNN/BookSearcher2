@@ -10,17 +10,26 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
 import com.example.booksearcher2.data.database.DataBaseObject
+import com.example.booksearcher2.data.database.FavouriteBookDao
 import com.example.booksearcher2.data.database.FavouriteBookDataBase
+import com.example.booksearcher2.data.repository.FavouriteBookRepositoryImpl
 import com.example.booksearcher2.domain.models.database.FavouriteBook
+import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
 
     private lateinit var btAdd: Button
+    private lateinit var btDelete: Button
     private lateinit var edTitle: EditText
     private lateinit var edAuthor: EditText
     private lateinit var edUrl: EditText
     private lateinit var favouriteRecyclerView: RecyclerView
     private lateinit var adapter: FavouriteAdapter
+    val favouriteBookRepositoryImpl by lazy {FavouriteBookRepositoryImpl(requireContext())}
+    val getDaoDbUseCase by lazy {GetDaoDbUseCase(favouriteBookRepositoryImpl)}
 
     private lateinit var viewModel: FavouriteViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,6 +39,7 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
         edTitle = requireView().findViewById(R.id.edTitle)
         edAuthor = requireView().findViewById(R.id.edAuthor)
         edUrl = requireView().findViewById(R.id.edUrl)
+        btDelete = requireView().findViewById(R.id.btDelete)
 
         favouriteRecyclerView = requireView().findViewById(R.id.recyclerViewFavouriteBooks)
         favouriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -37,8 +47,8 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
         favouriteRecyclerView.adapter = adapter
 
 
-        val dao = DataBaseObject.getInstance(requireContext()).favouriteBookDao()
-        val factory = FavouriteViewModelFactory(dao)
+//        val dao = DataBaseObject.getInstance(requireContext()).favouriteBookDao()
+        val factory = FavouriteViewModelFactory(getDaoDbUseCase)
         viewModel = ViewModelProvider(this, factory).get(FavouriteViewModel::class.java)
 
         btAdd.setOnClickListener{
@@ -58,7 +68,16 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
 
     }
 
-
+    private fun deleteBookData(){
+        viewModel.deleteBook(
+            book = FavouriteBook(
+                id = 0,
+                title = edTitle.text.toString(),
+                author = edAuthor.text.toString(),
+                coverUrl = edUrl.text.toString()
+            )
+        )
+    }
     private fun saveBookData() {
 //        val title = edTitle.text.toString()
 //        val author = edAuthor.text.toString()

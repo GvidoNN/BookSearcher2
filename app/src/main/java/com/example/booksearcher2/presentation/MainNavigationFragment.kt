@@ -1,10 +1,11 @@
-package com.example.booksearcher2
+package com.example.booksearcher2.presentation
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.booksearcher2.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainNavigationFragment:Fragment(R.layout.fragment_main_navigation) {
