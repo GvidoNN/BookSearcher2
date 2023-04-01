@@ -7,6 +7,12 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.booksearcher2.domain.models.database.FavouriteBook
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
 
 @Dao
 interface FavouriteBookDao {

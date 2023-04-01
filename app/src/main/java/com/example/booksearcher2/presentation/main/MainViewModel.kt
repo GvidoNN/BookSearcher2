@@ -5,13 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.booksearcher2.domain.models.api.DataResponce
+import com.example.booksearcher2.domain.models.database.FavouriteBook
+import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
 import com.example.booksearcher2.domain.usecase.SearchInsideUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchInsideUseCase): ViewModel() {
+class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchInsideUseCase, private val getDaoDbUseCase: GetDaoDbUseCase): ViewModel() {
 
     private val searchInsideLiveData = MutableLiveData<DataResponce>()
     private var progressBarLiveData = MutableLiveData<Boolean>()
@@ -26,8 +28,11 @@ class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchI
         progressBarLiveData.postValue(true)
         var result = searchInsideUseCase.getSearchInside(text)
         searchInsideLiveData.postValue(result?.body() ?: null)
-
         progressBarLiveData.postValue(false)
+    }
+
+    fun insertBook(book: FavouriteBook) = viewModelScope.launch {
+        getDaoDbUseCase.getDaoDb().insertBook(book)
     }
 
 }

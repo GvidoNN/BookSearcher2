@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
 import com.example.booksearcher2.data.api.DataObject
 import com.example.booksearcher2.data.api.DataService
+import com.example.booksearcher2.domain.models.database.FavouriteBook
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,6 +42,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         adapter = SearchInsideAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        saveBookData()
 
         mainViewModel.searchInside.observe(viewLifecycleOwner) { result ->
             if (result != null) {
@@ -61,6 +63,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             setOnClick()
         }
 
+        adapter.setOnItemClickListener(object: SearchInsideAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Log.d("MyLog","$position")
+            }
+
+        })
+
 
     }
 
@@ -78,14 +88,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 btSearch.isClickable = true
             }
         }
-
-        adapter.setOnItemClickListener(object: SearchInsideAdapter.OnItemClickListener{
-            override fun onItemClick(position: Int) {
-
-                Log.d("MyLog","$position")
-            }
-
-        })
     }
 
     fun findItems() {
@@ -95,5 +97,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         progressBar = requireView().findViewById(R.id.progressBar)
         errorContainer = requireView().findViewById(R.id.errorContainer)
         btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
+    }
+
+    private fun saveBookData() {
+        mainViewModel.insertBook(
+            book = FavouriteBook(
+                id = 0,
+                title = "ligma",
+                author = "ligma",
+                coverUrl = "https://ligma.com"
+            )
+        )
     }
 }

@@ -47,7 +47,7 @@ class SearchInsideAdapter() :
         context = parent.context
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.inside_search_item, parent, false)
-        return InsideSearchViewHolder(view,favouriteBookListener)
+        return InsideSearchViewHolder(view, favouriteBookListener)
 
     }
 
