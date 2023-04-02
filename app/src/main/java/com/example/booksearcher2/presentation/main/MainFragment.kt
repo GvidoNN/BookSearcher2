@@ -1,7 +1,6 @@
 package com.example.booksearcher2.presentation.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -10,15 +9,12 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
 import com.example.booksearcher2.data.api.DataObject
 import com.example.booksearcher2.data.api.DataService
 import com.example.booksearcher2.domain.models.database.FavouriteBook
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,13 +23,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var apiService: DataService
-    lateinit var recyclerView: RecyclerView
-    lateinit var edEnter: EditText
-    lateinit var adapter: SearchInsideAdapter
-    lateinit var btSearch: ImageButton
-    lateinit var progressBar: ProgressBar
-    lateinit var errorContainer: LinearLayout
-    lateinit var btErrorTryAgain: Button
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var edEnter: EditText
+    private lateinit var adapter: SearchInsideAdapter
+    private lateinit var btSearch: ImageButton
+    private lateinit var progressBar: ProgressBar
+    private lateinit var errorContainer: LinearLayout
+    private lateinit var btErrorTryAgain: Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,7 +38,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         adapter = SearchInsideAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        saveBookData()
 
         mainViewModel.searchInside.observe(viewLifecycleOwner) { result ->
             if (result != null) {
@@ -65,10 +60,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         adapter.setOnItemClickListener(object: SearchInsideAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-
-                Log.d("MyLog","$position")
+                saveBookData(position)
             }
-
         })
 
 
@@ -99,14 +92,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
     }
 
-    private fun saveBookData() {
+    private fun saveBookData(position: Int) {
         mainViewModel.insertBook(
             book = FavouriteBook(
                 id = 0,
-                title = "ligma",
-                author = "ligma",
-                coverUrl = "https://ligma.com"
+                title = adapter.searchInsideList[position].edition.title,
+                author = adapter.searchInsideList[position].edition.authors[0].name,
+                coverUrl = adapter.searchInsideList[position].edition.cover_url
             )
         )
+
     }
 }
