@@ -1,5 +1,5 @@
 package com.example.booksearcher2.domain.models.api
 
-data class DataResponce(
+data class DataResponse(
     val hits: Hits
 )

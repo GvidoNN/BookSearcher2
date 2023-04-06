@@ -8,7 +8,6 @@ import javax.inject.Inject
 class GetDaoDbUseCase @Inject constructor(private val favouriteBookRepository: FavouriteBookReposotiry) {
 
     fun getDaoDb(): FavouriteBookDao {
-        Log.d("MyLog","в GetDaoDBUseCase был")
         return favouriteBookRepository.getDaoDb()
     }
 }

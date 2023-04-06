@@ -31,21 +31,12 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btAdd = requireView().findViewById(R.id.btAddToBD)
-        edTitle = requireView().findViewById(R.id.edTitle)
-        edAuthor = requireView().findViewById(R.id.edAuthor)
-        edUrl = requireView().findViewById(R.id.edUrl)
-        btDelete = requireView().findViewById(R.id.btDelete)
-
         displayAllBooks()
 
         favouriteRecyclerView = requireView().findViewById(R.id.recyclerViewFavouriteBooks)
         favouriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = FavouriteAdapter()
         favouriteRecyclerView.adapter = adapter
-        btAdd.setOnClickListener {
-            saveBookData()
-        }
 
         adapter.setOnItemClickListener(object : FavouriteAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
@@ -79,14 +70,4 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
         )
     }
 
-    private fun saveBookData() {
-        viewModel.insertBook(
-            book = FavouriteBook(
-                id = 0,
-                title = edTitle.text.toString(),
-                author = edAuthor.text.toString(),
-                coverUrl = edUrl.text.toString()
-            )
-        )
-    }
 }

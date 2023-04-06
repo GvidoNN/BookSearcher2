@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="error">Упс, Ошибка! Пожалуйста попробуйте позже</string>
     <string name="try_again">ПЕРЕЗАГРУЗКА</string>
     <string name="search">Поиск</string>

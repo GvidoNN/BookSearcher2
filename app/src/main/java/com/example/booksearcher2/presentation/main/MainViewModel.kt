@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.booksearcher2.domain.models.api.DataResponce
+import com.example.booksearcher2.domain.models.api.DataResponse
 import com.example.booksearcher2.domain.models.database.FavouriteBook
 import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
 import com.example.booksearcher2.domain.usecase.SearchInsideUseCase
@@ -15,10 +15,10 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchInsideUseCase, private val getDaoDbUseCase: GetDaoDbUseCase): ViewModel() {
 
-    private val searchInsideLiveData = MutableLiveData<DataResponce>()
+    private val searchInsideLiveData = MutableLiveData<DataResponse>()
     private var progressBarLiveData = MutableLiveData<Boolean>()
 
-    val searchInside : LiveData<DataResponce>
+    val searchInside : LiveData<DataResponse>
     get() = searchInsideLiveData
 
     val progressBar: LiveData<Boolean>

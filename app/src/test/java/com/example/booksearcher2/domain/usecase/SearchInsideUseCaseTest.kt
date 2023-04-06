@@ -4,10 +4,8 @@ import com.example.booksearcher2.domain.models.api.*
 import com.example.booksearcher2.domain.repository.SearchInsideRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import okhttp3.Response
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
@@ -19,7 +17,7 @@ class SearchInsideUseCaseTest {
 
     // Подготавливаем тестовые данные для проверки
     private val testText = "test"
-    private val testDataResponse = mock<retrofit2.Response<DataResponce>>()
+    private val testDataResponse = mock<retrofit2.Response<DataResponse>>()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test

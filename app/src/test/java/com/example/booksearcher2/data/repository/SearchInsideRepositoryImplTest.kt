@@ -3,8 +3,6 @@ package com.example.booksearcher2.data.repository
 import com.example.booksearcher2.data.api.DataService
 import com.example.booksearcher2.domain.models.api.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -27,7 +25,7 @@ class SearchInsideRepositoryImplTest {
 
         // Подготавливаем тестовые данные для проверки
         val testText = "test"
-        val testDataResponse = DataResponce(hits = Hits(
+        val testDataResponse = DataResponse(hits = Hits(
             hits = listOf(Hit(edition = Edition(listOf(Author("test","test")), borrow_url = "test", cover_url = "test", key = "test", title = "test", url = "test", work_key = "test"), highlight = Highlight(listOf("test")))),total = 1))
         // Настраиваем поведение mock объектов при вызове метода getSearchInside
         whenever(retrofit.create(DataService::class.java)).thenReturn(dataService)

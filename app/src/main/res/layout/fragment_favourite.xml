@@ -10,42 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Title" />
-
-        <EditText
-            android:id="@+id/edUrl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="https:://ligma.com" />
-
-        <EditText
-            android:id="@+id/edAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Author" />
-
-        <Button
-            android:id="@+id/btAddToBD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="add" />
-
-        <Button
-            android:id="@+id/btDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="delete" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFavouriteBooks"
             android:layout_width="match_parent"

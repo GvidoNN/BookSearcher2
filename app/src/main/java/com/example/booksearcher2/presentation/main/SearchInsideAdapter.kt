@@ -36,6 +36,8 @@ class SearchInsideAdapter() :
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
         init {
             imAddToFavourite.setOnClickListener{
+                imAddToFavourite.setImageResource(R.drawable.icon_favourite_true)
+                imAddToFavourite.isClickable = false
                 listener.onItemClick(adapterPosition)
                 Log.d("MyLog","Click on this shit")
             }
@@ -72,20 +74,17 @@ class SearchInsideAdapter() :
         } catch (e: java.lang.Exception) {
             holder.tvAuthorName.text = "Non Author"
         }
-        var textSub = bookData.highlight.text[0].replace("{{", "\b")
-        holder.tvSubject.text = textSub
+        var textSub = bookData.highlight.text[0]
+        holder.tvSubject.text = editSubjectText(textSub)
         val isExpandable: Boolean = bookData.isExpandable
         holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
+        holder.imAddToFavourite.visibility = if(isExpandable) View.GONE else View.VISIBLE
+
         holder.constraintLayout.setOnClickListener {
             isAnyItemExpanded(position)
             bookData.isExpandable = !bookData.isExpandable
             notifyItemChanged(position)
         }
-//        holder.imAddToFavourite.setOnClickListener{
-//            holder.imAddToFavourite.setImageResource(R.drawable.icon_favourite_true)
-//        }
-
-
     }
 
     private fun isAnyItemExpanded(position: Int) {
@@ -105,6 +104,11 @@ class SearchInsideAdapter() :
 
     fun setOnItemClickListener(listener: OnItemClickListener){
         favouriteBookListener = listener
+    }
+
+    private fun editSubjectText(text: String): String{
+        val newtext = text.replace("{{{","| ").replace("}}}"," |")
+        return newtext
     }
 
 }
