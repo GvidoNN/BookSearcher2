@@ -48,8 +48,15 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteBookView
         val favouriteBookData = favouriteBookList[position]
         holder.tvAuthorName.text = favouriteBookData.author
         holder.tvFavouriteTitle.text = favouriteBookData.title
+
         val url = "https:" + favouriteBookData.coverUrl
-        Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
+        if(url == "https:null"){
+            holder.imCoverBook.setImageResource(R.drawable.nocover)
+        }
+        else{
+            Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
+        }
+
     }
     override fun getItemCount(): Int {
         return favouriteBookList.size

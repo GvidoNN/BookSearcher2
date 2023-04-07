@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_for_background">
 
     <include
         layout="@layout/part_result"
@@ -20,25 +21,35 @@
             android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
+            <ImageButton
+                android:id="@+id/btMicro"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/color_for_background"
+                app:srcCompat="@drawable/ic_micro" />
+
             <EditText
                 android:id="@+id/edEnter"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="48dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:background="@drawable/little_frame"
-                android:drawableStart="@drawable/book_icon"
+                android:drawableStart="@drawable/ic_book"
                 android:drawablePadding="8dp"
                 android:ems="10"
-
                 android:inputType="textPersonName"
-                android:paddingStart="5dp"
+                android:paddingStart="8dp"
+                android:fontFamily="@font/nunito_medium"
                 android:text="ligma" />
 
             <ImageButton
                 android:id="@+id/btSearch"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="0dp"
-                android:src="?android:attr/actionModeWebSearchDrawable" />
+                android:backgroundTint="@color/color_for_background"
+                android:src="@drawable/ic_search" />
 
         </LinearLayout>
 

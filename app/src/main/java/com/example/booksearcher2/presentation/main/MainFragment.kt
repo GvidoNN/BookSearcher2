@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
 import com.example.booksearcher2.data.api.DataObject
 import com.example.booksearcher2.data.api.DataService
-import com.example.booksearcher2.domain.models.database.FavouriteBook
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -60,7 +59,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         adapter.setOnItemClickListener(object: SearchInsideAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                saveBookData(position)
+                saveBookData(position = position)
             }
         })
 
@@ -94,12 +93,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private fun saveBookData(position: Int) {
         mainViewModel.insertBook(
-            book = FavouriteBook(
-                id = 0,
-                title = adapter.searchInsideList[position].edition.title,
-                author = adapter.searchInsideList[position].edition.authors[0].name,
-                coverUrl = adapter.searchInsideList[position].edition.cover_url
-            )
+            mainViewModel.checkBook(position = position, adapter = adapter)
         )
 
     }

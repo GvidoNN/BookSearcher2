@@ -21,7 +21,6 @@ object DataBaseObject {
     @Singleton
     fun getInstance(@ApplicationContext context: Context): FavouriteBookDataBase {
         synchronized(this) {
-            Log.d("MyLog","Мы в корне DataBaseObject")
             var instance = INSTANCE
             if(instance == null){
                 instance = Room.databaseBuilder(

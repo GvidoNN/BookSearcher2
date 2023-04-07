@@ -67,12 +67,12 @@ class SearchInsideAdapter() :
         try {
             holder.tvTextName.text = bookData.edition.title
         } catch (e: Exception) {
-            holder.tvTextName.text = "Non Title"
+            holder.tvTextName.text = context.getString(R.string.nan_title)
         }
         try {
             holder.tvAuthorName.text = bookData.edition.authors[0].name
         } catch (e: java.lang.Exception) {
-            holder.tvAuthorName.text = "Non Author"
+            holder.tvAuthorName.text = context.getString(R.string.nan_author)
         }
         var textSub = bookData.highlight.text[0]
         holder.tvSubject.text = editSubjectText(textSub)
