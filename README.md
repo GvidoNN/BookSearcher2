@@ -1,5 +1,6 @@
 # Приложение для поиска книг по тексту(или слову) из них
-![image](https://github.com/GvidoNN/BookSearcher2/blob/master/booksearcher.png)
+![image](https://github.com/GvidoNN/BookSearcher2/blob/master/screen1.png)
+![image](https://github.com/GvidoNN/BookSearcher2/blob/master/screen2.png)
 # Принцип простой: вписываешь строку или слово из книги и оно находит совпадения из огромной онлайн библиотеки. Поддерживаются все языки мира
 <h2 align="center"> Стек технологий на данный момент в проекте:</h2>
 <h3 align="center"> Clean Architecture с паттерном MVVM</h3>
