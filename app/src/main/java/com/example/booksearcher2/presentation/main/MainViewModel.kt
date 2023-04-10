@@ -13,6 +13,7 @@ import com.example.booksearcher2.domain.models.database.FavouriteBook
 import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
 import com.example.booksearcher2.domain.usecase.SearchInsideUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.FieldPosition
 import javax.inject.Inject
@@ -29,24 +30,25 @@ class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchI
     val progressBar: LiveData<Boolean>
     get() = progressBarLiveData
 
-    fun searchResponce(text: String) = viewModelScope.launch {
+    fun searchResponce(text: String) = viewModelScope.launch(Dispatchers.IO) {
         progressBarLiveData.postValue(true)
         var result = searchInsideUseCase.getSearchInside(text)
         searchInsideLiveData.postValue(result?.body() ?: null)
         progressBarLiveData.postValue(false)
     }
 
-    fun insertBook(book: FavouriteBook) = viewModelScope.launch {
+    fun insertBook(book: FavouriteBook) = viewModelScope.launch(Dispatchers.IO) {
         getDaoDbUseCase.getDaoDb().insertBook(book)
     }
 
     fun checkBook(position: Int, adapter: SearchInsideAdapter): FavouriteBook{
+        val bookData = adapter.searchInsideList[position].edition
         return try{
             FavouriteBook(
                 id = 0,
-                title = adapter.searchInsideList[position].edition.title,
-                author = adapter.searchInsideList[position].edition.authors[0].name,
-                coverUrl = adapter.searchInsideList[position].edition.cover_url
+                title = bookData.title,
+                author = bookData.authors[0].name,
+                coverUrl = bookData.coverUrl
             )
         }
         catch (e: java.lang.NullPointerException){

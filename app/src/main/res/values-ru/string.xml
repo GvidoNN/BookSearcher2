@@ -6,4 +6,5 @@
     <string name="favourite">Избранное</string>
     <string name="nan_title">Неизвестное название</string>
     <string name="nan_author">Неизвестный автор</string>
+    <string name="favourite_info">Здесь будут ваши избранные книги</string>
 </resources>

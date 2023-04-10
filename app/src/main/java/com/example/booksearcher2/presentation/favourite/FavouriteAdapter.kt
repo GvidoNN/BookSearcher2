@@ -1,7 +1,6 @@
 package com.example.booksearcher2.presentation.favourite
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.booksearcher2.R
 import com.example.booksearcher2.domain.models.database.FavouriteBook
-import com.example.booksearcher2.presentation.main.SearchInsideAdapter
 
 class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteBookViewHolder>() {
 
@@ -33,7 +31,6 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteBookView
         init {
             imDeleteBook.setOnClickListener{
                 listener.onItemClick(adapterPosition)
-                Log.d("MyLog","Delete this shit id")
             }
         }
     }

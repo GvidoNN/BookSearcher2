@@ -59,7 +59,7 @@ class SearchInsideAdapter() :
     override fun onBindViewHolder(holder: InsideSearchViewHolder, position: Int) {
         val bookData = searchInsideList[position]
         try {
-            val url = "https:" + bookData.edition.cover_url
+            val url = "https:" + bookData.edition.coverUrl
             Glide.with(holder.itemView).load(url).into(holder.imCoverBook)
         } catch (e: Exception) {
             holder.imCoverBook.setImageResource(R.drawable.nocover)

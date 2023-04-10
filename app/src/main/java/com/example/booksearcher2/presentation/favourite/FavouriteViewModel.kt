@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.booksearcher2.domain.models.database.FavouriteBook
 import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,15 +14,11 @@ class FavouriteViewModel @Inject constructor(private val getDaoDbUseCase: GetDao
 
     var books = getDaoDbUseCase.getDaoDb().getAllBooks()
 
-    fun insertBook(book: FavouriteBook) = viewModelScope.launch {
-        getDaoDbUseCase.getDaoDb().insertBook(book)
-    }
-
-    fun updateBook(book: FavouriteBook) = viewModelScope.launch {
+    fun updateBook(book: FavouriteBook) = viewModelScope.launch(Dispatchers.IO) {
         getDaoDbUseCase.getDaoDb().updateBook(book)
     }
 
-    fun deleteBook(book: FavouriteBook) = viewModelScope.launch {
+    fun deleteBook(book: FavouriteBook) = viewModelScope.launch(Dispatchers.IO) {
         getDaoDbUseCase.getDaoDb().deleteBook(book)
     }
 

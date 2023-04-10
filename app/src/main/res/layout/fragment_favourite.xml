@@ -6,15 +6,36 @@
     android:layout_height="match_parent"
     android:background="@color/color_for_background">
 
+    <TextView
+        android:id="@+id/tvFavouriteInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_medium"
+        android:gravity="center"
+        android:text="@string/favourite_info"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFavouriteBooks"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:visibility="visible">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
