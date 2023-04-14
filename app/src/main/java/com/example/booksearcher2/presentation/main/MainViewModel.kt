@@ -12,6 +12,7 @@ import com.example.booksearcher2.domain.models.api.DataResponse
 import com.example.booksearcher2.domain.models.database.FavouriteBook
 import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
 import com.example.booksearcher2.domain.usecase.SearchInsideUseCase
+import com.example.booksearcher2.domain.usecase.SpeechRecognizerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,16 +20,21 @@ import java.text.FieldPosition
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchInsideUseCase, private val getDaoDbUseCase: GetDaoDbUseCase, private val apl: Application): ViewModel() {
+class MainViewModel @Inject constructor(
+    private val searchInsideUseCase: SearchInsideUseCase,
+    private val getDaoDbUseCase: GetDaoDbUseCase,
+    private val apl: Application,
+    private val speechRecognizerUseCase: SpeechRecognizerUseCase
+) : ViewModel() {
 
     private val searchInsideLiveData = MutableLiveData<DataResponse>()
     private var progressBarLiveData = MutableLiveData<Boolean>()
 
-    val searchInside : LiveData<DataResponse>
-    get() = searchInsideLiveData
+    val searchInside: LiveData<DataResponse>
+        get() = searchInsideLiveData
 
     val progressBar: LiveData<Boolean>
-    get() = progressBarLiveData
+        get() = progressBarLiveData
 
     fun searchResponce(text: String) = viewModelScope.launch(Dispatchers.IO) {
         progressBarLiveData.postValue(true)
@@ -41,17 +47,16 @@ class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchI
         getDaoDbUseCase.getDaoDb().insertBook(book)
     }
 
-    fun checkBook(position: Int, adapter: SearchInsideAdapter): FavouriteBook{
+    fun checkBook(position: Int, adapter: SearchInsideAdapter): FavouriteBook {
         val bookData = adapter.searchInsideList[position].edition
-        return try{
+        return try {
             FavouriteBook(
                 id = 0,
                 title = bookData.title,
                 author = bookData.authors[0].name,
                 coverUrl = bookData.coverUrl
             )
-        }
-        catch (e: java.lang.NullPointerException){
+        } catch (e: java.lang.NullPointerException) {
             FavouriteBook(
                 id = 0,
                 title = apl.getString(R.string.nan_title),
@@ -60,6 +65,14 @@ class MainViewModel @Inject constructor(private val searchInsideUseCase: SearchI
             )
         }
 
+    }
+
+    fun giveSpeechInterface(): SpeechRecognizerUseCase{
+        return speechRecognizerUseCase
+    }
+
+    fun giveText(): MutableLiveData<String> {
+        return speechRecognizerUseCase.text
     }
 
 }

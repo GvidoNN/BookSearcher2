@@ -4,6 +4,7 @@ import com.example.booksearcher2.domain.repository.FavouriteBookReposotiry
 import com.example.booksearcher2.domain.repository.SearchInsideRepository
 import com.example.booksearcher2.domain.usecase.GetDaoDbUseCase
 import com.example.booksearcher2.domain.usecase.SearchInsideUseCase
+import com.example.booksearcher2.domain.usecase.SpeechRecognizerUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,5 +22,10 @@ class DomainModule {
     @Provides
     fun provideGetDaoDBUseCase(favouriteBookReposotiry: FavouriteBookReposotiry): GetDaoDbUseCase {
         return GetDaoDbUseCase(favouriteBookRepository = favouriteBookReposotiry)
+    }
+
+    @Provides
+    fun provideSpeechRecognizerUseCase(): SpeechRecognizerUseCase {
+        return SpeechRecognizerUseCase()
     }
 }
