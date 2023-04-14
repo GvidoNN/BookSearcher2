@@ -2,7 +2,9 @@ package com.example.booksearcher2.presentation.favourite
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -10,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
+import com.example.booksearcher2.databinding.FragmentFavouriteBinding
+import com.example.booksearcher2.databinding.FragmentMainBinding
 import com.example.booksearcher2.domain.models.database.FavouriteBook
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,14 +25,22 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     private val viewModel: FavouriteViewModel by viewModels()
     private lateinit var favouriteRecyclerView: RecyclerView
     private lateinit var adapter: FavouriteAdapter
-    private lateinit var tvInfo: TextView
+    private lateinit var binding: FragmentFavouriteBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentFavouriteBinding.inflate(inflater)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         displayAllBooks()
 
-        tvInfo = requireView().findViewById(R.id.tvFavouriteInfo)
         favouriteRecyclerView = requireView().findViewById(R.id.recyclerViewFavouriteBooks)
         favouriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = FavouriteAdapter()
@@ -49,7 +61,7 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
 
     private fun displayAllBooks() {
         viewModel.books.observe(viewLifecycleOwner) {
-            if (it.size == 0) tvInfo.isVisible = true else tvInfo.isVisible = false
+            if (it.size == 0) binding.tvFavouriteInfo.isVisible = true else binding.tvFavouriteInfo.isVisible = false
             adapter.setFavouriteList(it)
             adapter.notifyDataSetChanged()
         }

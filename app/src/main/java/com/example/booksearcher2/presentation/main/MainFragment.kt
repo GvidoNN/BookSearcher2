@@ -1,19 +1,22 @@
 package com.example.booksearcher2.presentation.main
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
-import com.example.booksearcher2.data.api.DataObject
-import com.example.booksearcher2.data.api.DataService
+import com.example.booksearcher2.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -21,35 +24,48 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var apiService: DataService
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var edEnter: EditText
     private lateinit var adapter: SearchInsideAdapter
-    private lateinit var btSearch: ImageButton
-    private lateinit var progressBar: ProgressBar
     private lateinit var errorContainer: LinearLayout
     private lateinit var btErrorTryAgain: Button
+    private lateinit var binding: FragmentMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        adapter = SearchInsideAdapter()
+        super.onCreate(savedInstanceState)
+        Log.d("MyLog","OnCreate")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMainBinding.inflate(inflater)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findItems()
-        apiService = DataObject.getInstance()
-        adapter = SearchInsideAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        Log.d("MyLog","OnViewCreated")
+
+        errorContainer = requireView().findViewById(R.id.errorContainer)
+        btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
+
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         mainViewModel.searchInside.observe(viewLifecycleOwner) { result ->
             if (result != null) {
                 adapter.setMovieList(result.hits.hits)
-                errorContainer.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
+                errorContainer.isVisible = false
+                binding.recyclerView.isVisible = true
             } else {
-                errorContainer.visibility = View.VISIBLE
-                recyclerView.visibility = View.GONE
+                errorContainer.isVisible = true
+                binding.recyclerView.isVisible = false
             }
         }
 
-        btSearch.setOnClickListener {
+        binding.btSearch.setOnClickListener {
             setOnClick()
         }
 
@@ -67,34 +83,24 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     fun setOnClick() {
-        var text = edEnter.text.toString()
+        var text = binding.edEnter.text.toString()
         mainViewModel.searchResponce(text)
 
         mainViewModel.progressBar.observe(viewLifecycleOwner) {
             if (it == true) {
-                progressBar.visibility = View.VISIBLE
-                recyclerView.visibility = View.GONE
-                btSearch.isClickable = false
+                binding.progressBar.isVisible = true
+                binding.recyclerView.isVisible = false
+                binding.btSearch.isClickable = false
             } else {
-                progressBar.visibility = View.GONE
-                btSearch.isClickable = true
+                binding.progressBar.isVisible = false
+                binding.btSearch.isClickable = true
             }
         }
-    }
-
-    fun findItems() {
-        recyclerView = requireView().findViewById(R.id.recyclerView)
-        btSearch = requireView().findViewById(R.id.btSearch)
-        edEnter = requireView().findViewById(R.id.edEnter)
-        progressBar = requireView().findViewById(R.id.progressBar)
-        errorContainer = requireView().findViewById(R.id.errorContainer)
-        btErrorTryAgain = requireView().findViewById(R.id.btErrorTryAgain)
     }
 
     private fun saveBookData(position: Int) {
         mainViewModel.insertBook(
             mainViewModel.checkBook(position = position, adapter = adapter)
         )
-
     }
 }

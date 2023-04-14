@@ -1,7 +1,6 @@
 package com.example.booksearcher2.presentation.main
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +38,6 @@ class SearchInsideAdapter() :
                 imAddToFavourite.setImageResource(R.drawable.icon_favourite_true)
                 imAddToFavourite.isClickable = false
                 listener.onItemClick(adapterPosition)
-                Log.d("MyLog","Click on this shit")
             }
         }
     }

@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_for_background">
+    android:background="@color/color_for_background"
+    android:backgroundTint="@color/color_for_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/color_for_background"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -33,13 +35,21 @@
                 android:id="@+id/tvFavouriteTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvFavoriteAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito_medium"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <ImageButton
@@ -48,6 +58,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center|center_horizontal"
             android:layout_marginRight="15dp"
+            android:backgroundTint="@color/color_for_background"
             android:foregroundGravity="center"
             app:srcCompat="@drawable/icon_favourite_true" />
     </LinearLayout>
