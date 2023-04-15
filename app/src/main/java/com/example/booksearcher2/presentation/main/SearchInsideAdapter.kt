@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.booksearcher2.R
@@ -33,6 +35,7 @@ class SearchInsideAdapter() :
         val tvSubject: TextView = itemView.findViewById(R.id.tvSubject)
         val imAddToFavourite: ImageButton = itemView.findViewById(R.id.imAddToFavourite)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
+        val btBorrowBook: Button = itemView.findViewById(R.id.btBorrowBook)
         init {
             imAddToFavourite.setOnClickListener{
                 imAddToFavourite.setImageResource(R.drawable.icon_favourite_true)
@@ -75,8 +78,10 @@ class SearchInsideAdapter() :
         var textSub = bookData.highlight.text[0]
         holder.tvSubject.text = editSubjectText(textSub)
         val isExpandable: Boolean = bookData.isExpandable
-        holder.tvSubject.visibility = if (isExpandable) View.VISIBLE else View.GONE
-        holder.imAddToFavourite.visibility = if(isExpandable) View.GONE else View.VISIBLE
+        holder.tvSubject.isVisible = isExpandable
+        holder.imAddToFavourite.isVisible = !isExpandable
+        holder.btBorrowBook.isVisible = isExpandable
+
 
         holder.constraintLayout.setOnClickListener {
             isAnyItemExpanded(position)

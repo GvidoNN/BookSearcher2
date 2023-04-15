@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
@@ -18,10 +17,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.booksearcher2.R
 import com.example.booksearcher2.databinding.FragmentMainBinding
-import com.example.booksearcher2.domain.usecase.SpeechRecognizerUseCase
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,7 +31,6 @@ class MainFragment : Fragment(R.layout.fragment_main){
     private lateinit var btErrorTryAgain: Button
     private lateinit var binding: FragmentMainBinding
     private lateinit var speechRecognizer: SpeechRecognizer
-//    private val SpeechRecognizerUseCase by lazy {SpeechRecognizerUseCase()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         adapter = SearchInsideAdapter()
@@ -99,10 +95,14 @@ class MainFragment : Fragment(R.layout.fragment_main){
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
             speechRecognizer.startListening(intent)
-            mainViewModel.giveText().observe(viewLifecycleOwner){
+            mainViewModel.textToSpeech.observe(viewLifecycleOwner){
                 binding.edEnter.setText(it)
                 Log.d("MyLog","Сейчас сказал: ${it}")
             }
+        }
+
+        mainViewModel.statusOfSpeaking.observe(viewLifecycleOwner){
+            if(it == true) binding.btMicro.setImageResource(R.drawable.ic_micro_true) else binding.btMicro.setImageResource(R.drawable.ic_micro_false)
         }
     }
 

@@ -27,7 +27,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/color_for_background"
-                app:srcCompat="@drawable/ic_micro" />
+                app:srcCompat="@drawable/ic_micro_false" />
 
             <EditText
                 android:id="@+id/edEnter"

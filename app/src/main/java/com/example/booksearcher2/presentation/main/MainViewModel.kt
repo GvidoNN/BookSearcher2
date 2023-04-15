@@ -1,12 +1,10 @@
 package com.example.booksearcher2.presentation.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide
 import com.example.booksearcher2.R
 import com.example.booksearcher2.domain.models.api.DataResponse
 import com.example.booksearcher2.domain.models.database.FavouriteBook
@@ -16,7 +14,6 @@ import com.example.booksearcher2.domain.usecase.SpeechRecognizerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.FieldPosition
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +26,8 @@ class MainViewModel @Inject constructor(
 
     private val searchInsideLiveData = MutableLiveData<DataResponse>()
     private var progressBarLiveData = MutableLiveData<Boolean>()
+    private var statusOfSpeakingLiveData = speechRecognizerUseCase.statusOfSpeaking
+    private val textToSpeechLiveData = speechRecognizerUseCase.text
 
     val searchInside: LiveData<DataResponse>
         get() = searchInsideLiveData
@@ -36,6 +35,11 @@ class MainViewModel @Inject constructor(
     val progressBar: LiveData<Boolean>
         get() = progressBarLiveData
 
+    val statusOfSpeaking: LiveData<Boolean>
+        get() = statusOfSpeakingLiveData
+
+    val textToSpeech: LiveData<String>
+        get() = textToSpeechLiveData
     fun searchResponce(text: String) = viewModelScope.launch(Dispatchers.IO) {
         progressBarLiveData.postValue(true)
         var result = searchInsideUseCase.getSearchInside(text)
@@ -69,10 +73,6 @@ class MainViewModel @Inject constructor(
 
     fun giveSpeechInterface(): SpeechRecognizerUseCase{
         return speechRecognizerUseCase
-    }
-
-    fun giveText(): MutableLiveData<String> {
-        return speechRecognizerUseCase.text
     }
 
 }

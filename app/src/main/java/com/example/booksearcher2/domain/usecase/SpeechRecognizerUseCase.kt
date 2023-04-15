@@ -11,6 +11,7 @@ import com.example.booksearcher2.domain.models.api.DataResponse
 class SpeechRecognizerUseCase: RecognitionListener {
 
     val text = MutableLiveData<String>()
+    val statusOfSpeaking = MutableLiveData<Boolean>()
 
     override fun onReadyForSpeech(params: Bundle?) {
         Log.d("MyLog","Готов")
@@ -18,6 +19,8 @@ class SpeechRecognizerUseCase: RecognitionListener {
 
     override fun onBeginningOfSpeech() {
         Log.d("MyLog","Начал")
+        statusOfSpeaking.value = true
+
     }
 
     override fun onRmsChanged(p0: Float) {
@@ -45,6 +48,7 @@ class SpeechRecognizerUseCase: RecognitionListener {
         //Toast.makeText(requireContext(), "You said: ${matches?.get(0)}", Toast.LENGTH_SHORT).show()
         Log.d("MyLog","You said: ${matches?.get(0)}")
         text.value = matches?.get(0)
+        statusOfSpeaking.value = false
     }
 
     override fun onPartialResults(p0: Bundle?) {
