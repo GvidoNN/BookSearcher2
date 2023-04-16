@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_mainFragment2_to_favouriteFragment2"
             app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_webViewFragmentReadBook"
+            app:destination="@id/webViewFragmentReadBook" />
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
@@ -18,6 +21,20 @@
         android:label="FavouriteFragment" >
         <action
             android:id="@+id/action_favouriteFragment2_to_mainFragment2"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_favouriteFragment_to_webViewFragmentReadBook"
+            app:destination="@id/webViewFragmentReadBook" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragmentReadBook"
+        android:name="com.example.booksearcher2.presentation.WebViewFragmentReadBook"
+        android:label="WebViewFragmentReadBook" >
+        <action
+            android:id="@+id/action_webViewFragmentReadBook_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_webViewFragmentReadBook_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

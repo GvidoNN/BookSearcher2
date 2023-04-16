@@ -58,14 +58,16 @@ class MainViewModel @Inject constructor(
                 id = 0,
                 title = bookData.title,
                 author = bookData.authors[0].name,
-                coverUrl = bookData.coverUrl
+                coverUrl = bookData.coverUrl,
+                borrowUrl = bookData.borrowUrl
             )
         } catch (e: java.lang.NullPointerException) {
             FavouriteBook(
                 id = 0,
                 title = apl.getString(R.string.nan_title),
                 author = apl.getString(R.string.nan_author),
-                coverUrl = "null"
+                coverUrl = "null",
+                borrowUrl = "null"
             )
         }
 

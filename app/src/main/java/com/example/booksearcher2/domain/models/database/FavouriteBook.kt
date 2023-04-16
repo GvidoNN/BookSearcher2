@@ -15,5 +15,7 @@ data class FavouriteBook(
     @ColumnInfo(name = "book_author")
     var author: String,
     @ColumnInfo(name = "cover_url")
-    var coverUrl: String
+    var coverUrl: String,
+    @ColumnInfo(name = "borrow_url")
+    var borrowUrl: String
 )

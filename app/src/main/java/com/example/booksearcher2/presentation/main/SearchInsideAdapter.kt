@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,19 +27,19 @@ class SearchInsideAdapter() :
         notifyDataSetChanged()
     }
 
-    class InsideSearchViewHolder(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
+    class InsideSearchViewHolder(itemView: View, favouriteListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val tvTextName: TextView = itemView.findViewById(R.id.tvTextName)
         val tvAuthorName: TextView = itemView.findViewById(R.id.tvAuthorName)
         val imCoverBook: ImageView = itemView.findViewById(R.id.imCoverBook)
         val tvSubject: TextView = itemView.findViewById(R.id.tvSubject)
         val imAddToFavourite: ImageButton = itemView.findViewById(R.id.imAddToFavourite)
         val constraintLayout: ConstraintLayout = itemView.findViewById(R.id.constraintLayout)
-        val btBorrowBook: Button = itemView.findViewById(R.id.btBorrowBook)
+
         init {
             imAddToFavourite.setOnClickListener{
                 imAddToFavourite.setImageResource(R.drawable.icon_favourite_true)
                 imAddToFavourite.isClickable = false
-                listener.onItemClick(adapterPosition)
+                favouriteListener.onItemClick(adapterPosition)
             }
         }
     }
@@ -80,8 +79,6 @@ class SearchInsideAdapter() :
         val isExpandable: Boolean = bookData.isExpandable
         holder.tvSubject.isVisible = isExpandable
         holder.imAddToFavourite.isVisible = !isExpandable
-        holder.btBorrowBook.isVisible = isExpandable
-
 
         holder.constraintLayout.setOnClickListener {
             isAnyItemExpanded(position)
@@ -105,8 +102,9 @@ class SearchInsideAdapter() :
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener){
+    fun setOnFavouriteBookListener(listener: OnItemClickListener){
         favouriteBookListener = listener
+
     }
 
     private fun editSubjectText(text: String): String{
