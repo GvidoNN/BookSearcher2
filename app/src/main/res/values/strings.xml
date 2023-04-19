@@ -7,5 +7,6 @@
     <string name="nan_title">Nan Title</string>
     <string name="nan_author">Nan Author</string>
     <string name="favourite_info">Here will be your favourite books</string>
-    <string name="borrow_book">Читать книгу</string>
+    <string name="borrow_book">Read book</string>
+    <string name="empty_search">Nothing found</string>
 </resources>

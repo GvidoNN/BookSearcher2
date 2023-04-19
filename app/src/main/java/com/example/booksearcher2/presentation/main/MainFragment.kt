@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.booksearcher2.R
 import com.example.booksearcher2.databinding.FragmentMainBinding
@@ -62,13 +61,19 @@ class MainFragment : Fragment(R.layout.fragment_main){
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         mainViewModel.searchInside.observe(viewLifecycleOwner) { result ->
-            if (result != null) {
+            if(result.hits.total == 0){
+                binding.tvSearchEmptyConst.isVisible = true
+            }
+            else if (result != null) {
                 adapter.setMovieList(result.hits.hits)
                 errorContainer.isVisible = false
                 binding.recyclerView.isVisible = true
-            } else {
+                binding.tvSearchEmptyConst.isVisible = false
+            }
+            else {
                 errorContainer.isVisible = true
                 binding.recyclerView.isVisible = false
+                binding.tvSearchEmptyConst.isVisible = false
             }
         }
 
