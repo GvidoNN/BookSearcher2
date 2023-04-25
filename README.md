@@ -10,3 +10,5 @@
 <h3 align="center"> Jetpack navigation для навигации в приложении(Single Activity App)</h3>
 <h3 align="center"> JUnit5 и Mockito для Unit-тестов</h3>
 <h3 align="center"> SQLite via Room для сохранения в избранное</h3>
+<h3 align="center"> SpeechRecognizer для конвертации речи в текст</h3>
+<h3 align="center"> Firebase для аналитики внутри приложения</h3>
