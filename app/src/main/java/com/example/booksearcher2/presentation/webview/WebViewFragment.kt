@@ -1,4 +1,4 @@
-package com.example.booksearcher2.presentation
+package com.example.booksearcher2.presentation.webview
 
 import android.os.Bundle
 import android.util.Log

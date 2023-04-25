@@ -9,4 +9,5 @@
     <string name="favourite_info">Здесь будут ваши избранные книги</string>
     <string name="borrow_book">Читать книгу</string>
     <string name="empty_search">Ничего не найдено</string>
+    <string name="nan_borrow">Мы не нашли эту книгу в библиотеке :(</string>
 </resources>

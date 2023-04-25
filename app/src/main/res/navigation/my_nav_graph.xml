@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragmentReadBook"
-        android:name="com.example.booksearcher2.presentation.WebViewFragmentReadBook"
+        android:name="com.example.booksearcher2.presentation.webview.WebViewFragmentReadBook"
         android:label="WebViewFragmentReadBook" >
         <action
             android:id="@+id/action_webViewFragmentReadBook_to_favouriteFragment"

@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -67,15 +68,20 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
         adapter.setOnReadBookListener(object  : FavouriteAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 bundle = Bundle()
-                bundle.putString("url", adapter.favouriteBookList[position].borrowUrl)
-                findNavController().navigate(R.id.action_favouriteFragment_to_webViewFragmentReadBook, bundle)
+                if(adapter.favouriteBookList[position].borrowUrl != "null"){
+                    bundle.putString("url", adapter.favouriteBookList[position].borrowUrl)
+                    findNavController().navigate(R.id.action_favouriteFragment_to_webViewFragmentReadBook, bundle)
+                } else {
+                    Toast.makeText(requireContext(), R.string.nan_borrow, Toast.LENGTH_SHORT).show()
+                }
+
             }
         })
     }
 
     private fun displayAllBooks() {
         viewModel.books.observe(viewLifecycleOwner) {
-            if (it.size == 0) binding.tvFavouriteInfo.isVisible = true else binding.tvFavouriteInfo.isVisible = false
+            binding.tvFavouriteInfo.isVisible = it.size == 0
             adapter.setFavouriteList(it)
             adapter.notifyDataSetChanged()
         }

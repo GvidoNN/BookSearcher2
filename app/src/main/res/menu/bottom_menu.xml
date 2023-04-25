@@ -12,6 +12,4 @@
         android:title="@string/favourite"
         android:orderInCategory="2"
         />
-
-
 </menu>
