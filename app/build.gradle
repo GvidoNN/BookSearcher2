@@ -10,11 +10,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.dagger.hilt.android'
 
 android {
-    namespace 'com.example.booksearcher2'
+    namespace 'my.lovely.booksearcher2'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.booksearcher2"
+        applicationId "my.lovely.booksearcher2"
         minSdk 21
         targetSdk 33
         versionCode 1

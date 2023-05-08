@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
-        android:name=".app.App"
+        android:name="my.lovely.booksearcher2.app.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

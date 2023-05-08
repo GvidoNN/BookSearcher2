@@ -39,10 +39,10 @@
                 android:drawableStart="@drawable/ic_book"
                 android:drawablePadding="8dp"
                 android:ems="10"
+                android:hint="@string/search_hint"
                 android:inputType="textPersonName"
                 android:paddingStart="8dp"
-                android:fontFamily="@font/nunito_medium"
-                android:text="ligma" />
+                android:fontFamily="@font/nunito_medium" />
 
             <ImageButton
                 android:id="@+id/btSearch"

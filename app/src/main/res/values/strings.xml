@@ -10,4 +10,5 @@
     <string name="borrow_book">Read book</string>
     <string name="empty_search">Nothing found</string>
     <string name="nan_borrow">We didn\'t find this book in the library :(</string>
+    <string name="search_hint">Type text here...</string>
 </resources>
