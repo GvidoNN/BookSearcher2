@@ -5,6 +5,6 @@
     app:startDestination="@id/mainNavigationFragment">
     <fragment
         android:id="@+id/mainNavigationFragment"
-        android:name="com.example.booksearcher2.presentation.MainNavigationFragment"
+        android:name="my.lovely.booksearcher2.presentation.MainNavigationFragment"
         android:label="MainNavigationFragment" />
 </navigation>

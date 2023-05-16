@@ -2,6 +2,7 @@ package my.lovely.booksearcher2.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import my.lovely.booksearcher2.R
 import dagger.hilt.android.AndroidEntryPoint
 

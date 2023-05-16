@@ -36,7 +36,6 @@ class MainFragment : Fragment(R.layout.fragment_main){
     override fun onCreate(savedInstanceState: Bundle?) {
         adapter = SearchInsideAdapter()
         super.onCreate(savedInstanceState)
-        Log.d("MyLog","OnCreate")
     }
 
     override fun onCreateView(
@@ -50,7 +49,6 @@ class MainFragment : Fragment(R.layout.fragment_main){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("MyLog","OnViewCreated")
 
         setOnClickMicro()
 
@@ -90,7 +88,6 @@ class MainFragment : Fragment(R.layout.fragment_main){
                 saveBookData(position = position)
             }
         })
-
     }
 
     override fun onDestroy() {

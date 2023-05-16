@@ -1,11 +1,9 @@
 package my.lovely.booksearcher2.presentation.main
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import my.lovely.booksearcher2.R
 import my.lovely.booksearcher2.domain.models.api.DataResponse
 import my.lovely.booksearcher2.domain.models.database.FavouriteBook
 import my.lovely.booksearcher2.domain.usecase.GetDaoDbUseCase
@@ -14,13 +12,14 @@ import my.lovely.booksearcher2.domain.usecase.SpeechRecognizerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import my.lovely.booksearcher2.domain.ResourseWrapper
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val searchInsideUseCase: SearchInsideUseCase,
     private val getDaoDbUseCase: GetDaoDbUseCase,
-    private val apl: Application,
+    private val resourseWrapper: ResourseWrapper,
     private val speechRecognizerUseCase: SpeechRecognizerUseCase
 ) : ViewModel() {
 
@@ -64,13 +63,12 @@ class MainViewModel @Inject constructor(
         } catch (e: java.lang.NullPointerException) {
             FavouriteBook(
                 id = 0,
-                title = apl.getString(R.string.nan_title),
-                author = apl.getString(R.string.nan_author),
+                title = resourseWrapper.getTitle(),
+                author = resourseWrapper.getAuthor(),
                 coverUrl = "null",
                 borrowUrl = "null"
             )
         }
-
     }
 
     fun giveSpeechInterface(): SpeechRecognizerUseCase{

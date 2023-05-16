@@ -37,6 +37,7 @@ class SpeechRecognizerUseCase: RecognitionListener {
     override fun onError(error: Int) {
         // Called when an error occurs during recognition
         Log.d("MyLog","Ошибка")
+        statusOfSpeaking.value = false
     }
 
     override fun onResults(results: Bundle?) {

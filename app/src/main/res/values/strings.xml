@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">BookSearcher2</string>
+    <string name="app_name" translatable="false">Book Searcher</string>
     <string name="error">Oops Error! Please try again later</string>
     <string name="try_again">TRY AGAIN</string>
     <string name="search">Search</string>
@@ -11,4 +11,5 @@
     <string name="empty_search">Nothing found</string>
     <string name="nan_borrow">We didn\'t find this book in the library :(</string>
     <string name="search_hint">Type text here...</string>
+    <string name="search_start">Enter text for searching books</string>
 </resources>

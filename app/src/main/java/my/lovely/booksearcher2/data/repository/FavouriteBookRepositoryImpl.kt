@@ -7,7 +7,6 @@ import javax.inject.Inject
 class FavouriteBookRepositoryImpl @Inject constructor(private val favouriteBookDao: FavouriteBookDao): FavouriteBookReposotiry {
 
     override fun getDaoDb(): FavouriteBookDao{
-
         return favouriteBookDao
     }
 }

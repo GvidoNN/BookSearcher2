@@ -79,6 +79,16 @@
             android:text="@string/empty_search"
             android:visibility="gone"/>
 
+        <TextView
+            android:id="@+id/tvSearchStart"
+            android:fontFamily="@font/nunito_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:text="@string/search_start"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

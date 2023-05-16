@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.booksearcher2.presentation.main.MainFragment"
+        android:name="my.lovely.booksearcher2.presentation.main.MainFragment"
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment2_to_favouriteFragment2"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.booksearcher2.presentation.favourite.FavouriteFragment"
+        android:name="my.lovely.booksearcher2.presentation.favourite.FavouriteFragment"
         android:label="FavouriteFragment" >
         <action
             android:id="@+id/action_favouriteFragment2_to_mainFragment2"
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragmentReadBook"
-        android:name="com.example.booksearcher2.presentation.webview.WebViewFragmentReadBook"
+        android:name="my.lovely.booksearcher2.presentation.webview.WebViewFragmentReadBook"
         android:label="WebViewFragmentReadBook" >
         <action
             android:id="@+id/action_webViewFragmentReadBook_to_favouriteFragment"

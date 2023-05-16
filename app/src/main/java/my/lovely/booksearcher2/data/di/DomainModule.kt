@@ -1,5 +1,6 @@
 package my.lovely.booksearcher2.data.di
 
+import android.content.Context
 import my.lovely.booksearcher2.domain.repository.FavouriteBookReposotiry
 import my.lovely.booksearcher2.domain.repository.SearchInsideRepository
 import my.lovely.booksearcher2.domain.usecase.GetDaoDbUseCase
@@ -9,6 +10,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import my.lovely.booksearcher2.domain.ResourseWrapper
 
 
 @Module
@@ -27,5 +30,10 @@ class DomainModule {
     @Provides
     fun provideSpeechRecognizerUseCase(): SpeechRecognizerUseCase {
         return SpeechRecognizerUseCase()
+    }
+
+    @Provides
+    fun provideResourseWrapper(@ApplicationContext context: Context): ResourseWrapper {
+        return ResourseWrapper(context = context)
     }
 }
