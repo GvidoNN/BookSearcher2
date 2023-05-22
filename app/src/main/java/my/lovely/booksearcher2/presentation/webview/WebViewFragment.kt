@@ -1,7 +1,6 @@
 package my.lovely.booksearcher2.presentation.webview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.WebView
@@ -9,7 +8,7 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import my.lovely.booksearcher2.R
 
-class WebViewFragmentReadBook: Fragment(R.layout.fragment_web_view_read_book) {
+class WebViewFragment: Fragment(R.layout.fragment_web_view_read_book) {
 
     lateinit var webView: WebView
 
@@ -17,7 +16,6 @@ class WebViewFragmentReadBook: Fragment(R.layout.fragment_web_view_read_book) {
         super.onViewCreated(view, savedInstanceState)
         webView = requireView().findViewById(R.id.webView)
         val url = "https://openlibrary.org/" + arguments?.getString("url")
-        Log.d("MyLog",url)
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
 
