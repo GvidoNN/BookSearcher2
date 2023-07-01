@@ -1,4 +1,4 @@
-package my.lovely.booksearcher2.data.di
+package my.lovely.booksearcher2.di
 
 import my.lovely.booksearcher2.data.api.DataService
 import my.lovely.booksearcher2.data.database.FavouriteBookDao
@@ -29,4 +29,5 @@ class DataModule {
     fun provideFavouriteBookRespositoryImpl(favouriteBookDao: FavouriteBookDao): FavouriteBookReposotiry {
         return FavouriteBookRepositoryImpl(favouriteBookDao = favouriteBookDao)
     }
+
 }

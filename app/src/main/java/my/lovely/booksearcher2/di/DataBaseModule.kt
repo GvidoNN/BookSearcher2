@@ -1,4 +1,4 @@
-package my.lovely.booksearcher2.data.di
+package my.lovely.booksearcher2.di
 
 import my.lovely.booksearcher2.data.database.FavouriteBookDao
 import my.lovely.booksearcher2.data.database.FavouriteBookDataBase

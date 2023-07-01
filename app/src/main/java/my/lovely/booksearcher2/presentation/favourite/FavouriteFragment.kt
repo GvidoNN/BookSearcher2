@@ -74,7 +74,7 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
 
     private fun displayAllBooks() {
         viewModel.books.observe(viewLifecycleOwner) {
-            binding.tvFavouriteInfo.isVisible = it.size == 0
+            binding.tvFavouriteInfo.isVisible = it.isEmpty()
             adapter.setFavouriteList(it)
             adapter.notifyDataSetChanged()
         }

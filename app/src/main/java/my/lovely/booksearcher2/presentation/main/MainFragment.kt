@@ -127,7 +127,6 @@ class MainFragment : Fragment(R.layout.fragment_main){
             speechRecognizer.startListening(intent)
             mainViewModel.textToSpeech.observe(viewLifecycleOwner){
                 binding.edEnter.setText(it)
-                Log.d("MyLog","Сейчас сказал: ${it}")
             }
         }
 

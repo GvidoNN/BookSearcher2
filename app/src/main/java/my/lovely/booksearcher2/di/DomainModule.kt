@@ -1,4 +1,4 @@
-package my.lovely.booksearcher2.data.di
+package my.lovely.booksearcher2.di
 
 import android.content.Context
 import my.lovely.booksearcher2.domain.repository.FavouriteBookReposotiry

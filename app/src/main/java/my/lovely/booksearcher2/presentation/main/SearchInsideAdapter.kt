@@ -46,8 +46,7 @@ class SearchInsideAdapter() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InsideSearchViewHolder {
         context = parent.context
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.inside_search_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.inside_search_item, parent, false)
         return InsideSearchViewHolder(view, favouriteBookListener)
 
     }
